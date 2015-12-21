@@ -2,6 +2,7 @@
 \usepackage{nips15submit_e,times}
 \usepackage{hyperref}
 \usepackage{url}
+\usepackage{graphicx}
 %\documentstyle[nips14submit_09,times,art10]{article} % For LaTeX 2.09
 
 
@@ -114,6 +115,28 @@ not previous versions. Tweaking the style files may be grounds for rejection.
 %% Note that your submission is only valid if you get an e-mail
 %% confirmation from the server. If you do not get such an e-mail, please
 %% try uploading again. 
+
+
+\section{Data Collection}
+Several physical properties of liquid could potentially affect sound absorption and reflection rates through it~\cite{parthasarathy1955sound}. For example, viscosity, specific heats, density and temperature~\cite{absorb}. To choose a set of liquid that are commonly found in a household and cover as many different physical properties as possible, we finally chose 9 types of liquid for our experiment primarily based on their viscosity and density. The 9 different types of liquid we have chosen are: water, tonic water, milk, orange juice, apple juice, canola oil, olive oil, soy sauce and syrup.   
+
+We adopt a similar sensor design to our previous paper~\cite{fan2015soqr}. Instead of 3d printing a case to hold a microphone and a speaker together, we directly attach two components to a side surface of a bottle and hold them firmly in place with electric tape. The sensor unit and the bottle are kept unchanged for collecting data samples of different liquid types in our study. The set up is shown in Figure ~\ref{fig:set-up}. The data sampling application outputs a 20~20K Hz sine wave sweep as the probing sound and records at the same time using 44.1KHz 16 bit depth sampling method. The sweep sound itself is very brief, which is 0.1 second long. The recording lasts 1 more second after the sweep stops to capture the entire impulse response. Figure shows three spectrograms of three recordings when the bottle fills water to empty, half and completely full levels. 
+\begin{figure}
+\centering
+  \includegraphics[width=0.5\linewidth]{setup1.jpg}
+  \caption{Set up for data collection: the sensor unit is attached to a side surface of a bottle. The unit is connected to an android phone, where a data collection application runs.}
+  \label{fig:set-up}
+\end{figure}
+\begin{figure}
+\centering
+  \includegraphics[width=0.3\linewidth]{water_empty.png}
+  \includegraphics[width=0.3\linewidth]{water_half.png}
+  \includegraphics[width=0.3\linewidth]{water_full.png}
+  \caption{Spectrograms of impulse response recordings when the bottle is filled }
+  \label{fig:set-up}
+\end{figure}
+
+\section{Feature Extraction}
 
 
 \subsection{Retrieval of style files}
@@ -416,28 +439,7 @@ acknowledgments go at the end of the paper. Do not include
 acknowledgments in the anonymized submission, only in the 
 final paper. 
 
-\subsubsection*{References}
 
-References follow the acknowledgments. Use unnumbered third level heading for
-the references. Any choice of citation style is acceptable as long as you are
-consistent. It is permissible to reduce the font size to `small' (9-point) 
-when listing the references. {\bf Remember that this year you can use
-a ninth page as long as it contains \emph{only} cited references.}
-
-\small{
-[1] Alexander, J.A. \& Mozer, M.C. (1995) Template-based algorithms
-for connectionist rule extraction. In G. Tesauro, D. S. Touretzky
-and T.K. Leen (eds.), {\it Advances in Neural Information Processing
-Systems 7}, pp. 609-616. Cambridge, MA: MIT Press.
-
-[2] Bower, J.M. \& Beeman, D. (1995) {\it The Book of GENESIS: Exploring
-Realistic Neural Models with the GEneral NEural SImulation System.}
-New York: TELOS/Springer-Verlag.
-
-[3] Hasselmo, M.E., Schnell, E. \& Barkai, E. (1995) Dynamics of learning
-and recall at excitatory recurrent synapses and cholinergic modulation
-in rat hippocampal region CA3. {\it Journal of Neuroscience}
-{\bf 15}(7):5249-5262.
-}
-
+\bibliography{report}
+\bibliographystyle{plain}
 \end{document}
