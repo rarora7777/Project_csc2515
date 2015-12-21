@@ -5,6 +5,7 @@
 \usepackage{graphicx}
 \usepackage{subcaption}
 \usepackage{amsmath}
+\usepackage{tabularx}
 %\documentstyle[nips14submit_09,times,art10]{article} % For LaTeX 2.09
 
 \DeclareMathOperator*{\argmax}{arg\,max}
@@ -157,9 +158,27 @@ R1: For a given liquid, can we build a classifier that can tell its content leve
 R2: Given N types of known liquid data and 2 levels of an unknown liquid data, could we build a model that predicts its content level? If we can build a model, how many types of known liquid we need in order to achieve a decent performance? Put it differently, we want to explore how the prediction model's performance change as the number of known liquid (N) used for training increases. 
 
 \subsection{Exploration on R1}
-The classification problem here is to predict the content level from 11 possible levels (0 to 1 with 10 percent as the interval) given the extracted 21 standardized MFCC and LPC features computed from an impulse response sound clip recorded using our sensor. We train a support vector machine classifier using libSVM~\cite{chang2011libsvm}. For evaluation, we did 10-fold cross validation. The evaluation result is shown in Table X. With the data set we collected, we were able to achieve the similar performance as ~\cite{fan2015soqr}. 
+The classification problem here is to predict the content level from 11 possible levels (0 to 1 with 10 percent as the interval) given the extracted 21 standardized MFCC and LPC features computed from an impulse response sound clip recorded using our sensor. We train a support vector machine classifier using libSVM~\cite{chang2011libsvm}. For evaluation, we did 10-fold cross validation. The evaluation result is shown in Table~\ref{table:svmEval}. With the data set we collected, we were able to achieve the similar performance as ~\cite{fan2015soqr}. 
 
-
+\begin{table}[t]
+\caption{Evaluation of classification performance of an SVM classifier utilizing RBF kernel.}
+\label{table:svmEval}
+\begin{center}
+\begin{tabular}{ l | c | c | c }
+\textbf{LIQUID TYPE} & \textbf{OVERALL PRECISION} & \textbf{OVERALL RECALL} & \textbf{F-MEASURE} \\ \hline
+~ & ~ & ~ & ~\\
+Apple juice & 0.992 & 0.992 & 0.992 \\
+Canola oil & 0.996 & 0.996 & 0.996 \\
+Milk & 1.000 & 1.000 & 1.000 \\
+Olive oil & 0.998 & 0.998 & 0.998 \\
+Orange juice & 0.997 & 0.997 & 0.997 \\
+Soy sauce & 0.999 & 0.999 & 0.999 \\
+Syrup & 1.000 & 1.000 & 1.000 \\
+Tonic water & 0.996 & 0.996 & 0.996 \\
+Water & 0.999 & 0.999 & 0.999 \\
+\end{tabular}
+\end{center}
+\end{table}
 \subsection{Exploration on R2}
 
 \subsubsection{Ridge Regression}
@@ -315,30 +334,30 @@ todo: conclusion goes here.
 %\end{center}
 %\caption{Sample figure caption.}
 %\end{figure}
+%
+%\subsection{Tables}
+%
+%All tables must be centered, neat, clean and legible. Do not use hand-drawn
+%tables. The table number and title always appear before the table. See
+%Table~\ref{sample-table}.
+%
+%Place one line space before the table title, one line space after the table
+%title, and one line space after the table. The table title must be lower case
+%(except for first word and proper nouns); tables are numbered consecutively.
 
-\subsection{Tables}
-
-All tables must be centered, neat, clean and legible. Do not use hand-drawn
-tables. The table number and title always appear before the table. See
-Table~\ref{sample-table}.
-
-Place one line space before the table title, one line space after the table
-title, and one line space after the table. The table title must be lower case
-(except for first word and proper nouns); tables are numbered consecutively.
-
-\begin{table}[t]
-\caption{Sample table title}
-\label{sample-table}
-\begin{center}
-\begin{tabular}{ll}
-\multicolumn{1}{c}{\bf PART}  &\multicolumn{1}{c}{\bf DESCRIPTION}
-\\ \hline \\
-Dendrite         &Input terminal \\
-Axon             &Output terminal \\
-Soma             &Cell body (contains cell nucleus) \\
-\end{tabular}
-\end{center}
-\end{table}
+%\begin{table}[t]
+%\caption{Sample table title}
+%\label{sample-table}
+%\begin{center}
+%\begin{tabular}{l|l}
+%\multicolumn{1}{c}{\bf PART}  &\multicolumn{1}{c}{\bf DESCRIPTION}
+%\\ \hline \\
+%Dendrite         &Input terminal \\
+%Axon             &Output terminal \\
+%Soma             &Cell body (contains cell nucleus) \\
+%\end{tabular}
+%\end{center}
+%\end{table}
 %
 %\section{Final instructions}
 %Do not change any aspects of the formatting parameters in the style files.
