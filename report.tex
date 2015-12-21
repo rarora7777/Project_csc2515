@@ -138,6 +138,8 @@ where, $S$ is the number of frames during a sweep. That is, $S=(44100*0.01)/(W*5
 
 Finally, for the identified portion, we extract 13 MFCCs and 10 LPC for each frame, and them compute the average value of each feature. We remove the first MFCC feature because the distribution of this feature over all levels of any type of liquid are random and. We also remove the last LPC feature because it is always the same for all levels of all liquid types. Therefore, we have 21 features for learning our prediction models.
 
+todo: explanation of the standardization on features.
+
 \section{Feature Exploration}
 todo: exploration and visualization of all features.
 
@@ -155,6 +157,8 @@ R1: For a given liquid, can we build a classifier that can tell its content leve
 R2: Given N types of known liquid data and 2 levels of an unknown liquid data, could we build a model that predicts its content level? If we can build a model, how many types of known liquid we need in order to achieve a decent performance? Put it differently, we want to explore how the prediction model's performance change as the number of known liquid (N) used for training increases. 
 
 \subsection{Exploration on R1}
+The classification problem here is to predict the content level from 11 possible levels (0 to 1 with 10 percent as the interval) given the extracted 21 standardized MFCC and LPC features computed from an impulse response sound clip recorded using our sensor. We train a support vector machine classifier using libSVM~\cite{chang2011libsvm}. For evaluation, we did 10-fold cross validation. The evaluation result is shown in Table X. With the data set we collected, we were able to achieve the similar performance as ~\cite{fan2015soqr}. 
+
 
 \subsection{Exploration on R2}
 
