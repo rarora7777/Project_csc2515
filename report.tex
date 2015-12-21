@@ -120,7 +120,7 @@ not previous versions. Tweaking the style files may be grounds for rejection.
 \section{Data Collection}
 Several physical properties of liquid could potentially affect sound absorption and reflection rates through it~\cite{parthasarathy1955sound}. For example, viscosity, specific heats, density and temperature~\cite{absorb}. To choose a set of liquid that are commonly found in a household and cover as many different physical properties as possible, we finally chose 9 types of liquid for our experiment primarily based on their viscosity and density. The 9 different types of liquid we have chosen are: water, tonic water, milk, orange juice, apple juice, canola oil, olive oil, soy sauce and syrup.   
 
-We adopt a similar sensor design to our previous paper~\cite{fan2015soqr}. Instead of 3d printing a case to hold a microphone and a speaker together, we directly attach two components to a side surface of a bottle and hold them firmly in place with electric tape. The sensor unit and the bottle are kept unchanged for collecting data samples of different liquid types in our study. The set up is shown in Figure ~\ref{fig:set-up}. The data sampling application outputs a 20~20K Hz sine wave sweep as the probing sound and records at the same time using 44.1KHz 16 bit depth sampling method. The sweep sound itself is very brief, which is 0.1 second long. The recording lasts 1 more second after the sweep stops to capture the entire impulse response. Figure shows three spectrograms of three recordings when the bottle fills water to empty, half and completely full levels. 
+We adopt a similar sensor design to our previous paper~\cite{fan2015soqr}. Instead of 3d printing a case to hold a microphone and a speaker together, we directly attach two components to a side surface of a bottle and hold them firmly in place with electric tape. The sensor unit and the bottle are kept unchanged for collecting data samples of different liquid types in our study. The set up is shown in Figure ~\ref{fig:set-up}. The data sampling application outputs a 20~20K Hz sine wave sweep as the probing sound and records at the same time using 44.1KHz 16 bit depth sampling method. The sweep sound itself is very brief, which is 0.1 second long. The recording lasts 1 more second after the sweep stops to capture the entire impulse response. Figure X shows three spectrograms of three recordings when the bottle fills water to empty, half and completely full levels. As the content level changes, the different frequencies are affected differently. This can be understood as an acoustic fingerprint of the corresponding content level.  
 \begin{figure}
 \centering
   \includegraphics[width=0.5\linewidth]{setup1.jpg}
@@ -133,11 +133,54 @@ We adopt a similar sensor design to our previous paper~\cite{fan2015soqr}. Inste
   \includegraphics[width=0.3\linewidth]{water_half.png}
   \includegraphics[width=0.3\linewidth]{water_full.png}
   \caption{Spectrograms of impulse response recordings when the bottle is filled }
-  \label{fig:set-up}
+  \label{fig:spectrograms}
 \end{figure}
 
-\section{Feature Extraction}
+We follow the same data collection protocol as we have used in our previous paper~\cite{fan2015soqr}. A brief summary of the data collection steps is presented below:
 
+1. Choose one liquid from the 9 candidate liquid.
+
+2. Start from the empty level. Start the mobile data collection application. The application will start probing the container and record the impulse response for 100 times.
+
+3. After it finishes data collection for current level, we measure 10 percent of the liquid using a beak and pour the liquid into the container. We wait until the liquid settles and then start the mobile application for data collection.
+
+4. We repeat step 3 until the container is fully filled.
+
+5. We clean the container and start the above 1-4 steps until we finish collecting data samples for all 9 liquid.
+
+For the data set of each liquid, there are 11 content levels in total and 100 sample audio recordings per content level. Thus, there are 1100 sample recordings per liquid and 9900 for all liquid.   
+
+\section{Feature Extraction}
+To make use of these raw audio samples, we extract and use the following two types of acoustic features: Mel-frequency cepstral coefficients (MFCCs) and linear predictive coefficients (LPC). MFCCs capture properties of the real cepstral of a short-time signal derived from the fast Fourier transform of an acoustic signal. It has been used for speech recognition and scene understanding~\cite{kunze2007symbolic}~\cite{fan2014public}, etc. LPC calculates the power spectrum of a signal and has been demonstrated efficient for formant analysis and speech analysis. 
+
+To extract these two features, an audio recording is divided into short-time frames using a sliding window of size W = 512 samples and 50 percent overlap between two adjacent windows. The output frames are smoothed with a Hamming window function applied and then are converted to frequency domain via fast Fourier transformation. The magnitudes of each frequency bin k (k=1...W) of a frame j are represent FFTj,k. We then identify the portion of the recording where the impulse response impacts the most by using the following equation: todo. Finally, for the identified portion, we extract 13 MFCCs and 10 LPC for each frame, and them compute the average value of each feature. We remove the first MFCC feature because the distribution of this feature over all levels of any type of liquid are random and. We also remove the last LPC feature because it is always the same for all levels of all liquid types. Therefore, we have 21 features for learning our prediction models.
+
+\section{Feature Exploration}
+todo: exploration and visualization of all features.
+
+1. shows the feature change over different levels for one liquid
+
+
+\section{Evaluation}
+In this section, we report our exploration on the proposed research questions.
+
+\subsection{Research Questions}
+We examine the following research questions.
+
+R1: For a given liquid, can we build a classifier that can tell its content level? This question is meant to validate the results that our previous paper has discovered using the new data set we have collected.
+
+R2: Given N types of known liquid data and 2 levels of an unknown liquid data, could we build a model that predicts its content level? If we can build a model, how many types of known liquid we need in order to achieve a decent performance? Put it differently, we want to explore how the prediction model's performance change as the number of known liquid (N) used for training increases. 
+
+\subsection{Exploration on R1}
+
+\subsection{Exploration on R2}
+
+\subsubsection{Ridge Regression}
+
+\subsubsection{Neural Network}
+
+\section{Conclusion}
+todo: conclusion goes here.
 
 \subsection{Retrieval of style files}
 
