@@ -3,6 +3,7 @@
 \usepackage{hyperref}
 \usepackage{url}
 \usepackage{graphicx}
+\usepackage{subcaption}
 %\documentstyle[nips14submit_09,times,art10]{article} % For LaTeX 2.09
 
 
@@ -124,15 +125,27 @@ We adopt a similar sensor design to our previous paper~\cite{fan2015soqr}. Inste
 \begin{figure}
 \centering
   \includegraphics[width=0.5\linewidth]{setup1.jpg}
-  \caption{Set up for data collection: the sensor unit is attached to a side surface of a bottle. The unit is connected to an android phone, where a data collection application runs.}
+  \includegraphics[width=0.242\linewidth]{setup2.jpg}
+  \caption{Setup for data collection: the sensor unit is attached to a side surface of a bottle. The unit is connected to an android phone, where a data collection application runs.}
   \label{fig:set-up}
 \end{figure}
-\begin{figure}
+\begin{figure}[htb]
 \centering
-  \includegraphics[width=0.3\linewidth]{water_empty.png}
-  \includegraphics[width=0.3\linewidth]{water_half.png}
-  \includegraphics[width=0.3\linewidth]{water_full.png}
-  \caption{Spectrograms of impulse response recordings when the bottle is filled }
+\begin{subfigure}{0.32\linewidth}
+  \includegraphics[width=\linewidth]{water_empty.png}
+  \caption*{Empty}
+\end{subfigure}
+\begin{subfigure}{0.32\linewidth}
+  \includegraphics[width=\linewidth]{water_half.png}
+  \caption*{Half-filled}
+\end{subfigure}
+\begin{subfigure}{0.32\linewidth}
+  \includegraphics[width=\linewidth]{water_full.png}
+  \caption*{Fully filled}
+\end{subfigure}
+%  \includegraphics[width=0.3\linewidth]{water_half.png}
+%  \includegraphics[width=0.3\linewidth]{water_full.png}
+  \caption{Spectrograms of impulse response recordings when the bottle contains water.}
   \label{fig:set-up}
 \end{figure}
 
