@@ -187,7 +187,6 @@ We examine the following research questions.
 
 \paragraph{R2} Given $N (N = 1, \dots,\#liquids - 1)$ types of known liquid data and 2 levels (the empty and full levels) of an unknown liquid data, could a prediction model be learned to predict its content level? If we can build a model, how many types of known liquid we need in order to achieve a decent performance? Put it differently, we want to explore how the prediction model's performance changes as the number of known liquid ($N$) used for training is varied. Do the two levels of the unknown liquid data help improve the prediction model? 
 
-
 \subsection{Exploration on R1}
 The classification problem here is to predict the content level from 11 possible levels (0 to 1 with 10 percent as the interval) given the extracted 21 standardized MFCC and LPC features computed from an impulse response sound clip recorded using our sensor. We train a support vector machine classifier using libSVM~\cite{chang2011libsvm}. For evaluation, we did 10-fold cross validation. The evaluation result is shown in Table~\ref{table:svmEval}. With the data set we collected, we were able to achieve similar performance as~\cite{fan2015soqr}.
 
@@ -267,7 +266,7 @@ One potential problem with this strategy is that the number of samples from $N$ 
 \end{table}
 
 \subsubsection{Results}
-In this section, we show the results of the two regression models (Ridge regression and MLP) using two Reweight samples strategies ($\mathtt{Strategy}^1$,$\mathtt{Strategy}^2$). The overall results are described in Table~\ref{table:result}.
+In this section, we show the results of the two regression models (Ridge regression and MLP) using two Reweight samples strategies ($\mathtt{Strategy}^1$,$\mathtt{Strategy}^2$). The overall results are described in Table~\ref{table:result}. Note that all training processes include the 2 level data (empty and full levels) from the testing liquid.
 
 \begin{itemize}
 \item Figure~\ref{fig:ridge} shows the performance of the two re-weighting strategies using ridge regression model. The X-axis is the number of liquids used for training.
