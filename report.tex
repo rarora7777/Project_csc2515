@@ -158,7 +158,7 @@ We examine the following research questions.
 
 R1: For a given liquid, can we build a classifier that can tell its content level? This question is meant to validate the results that our previous paper has discovered using the new data set we have collected.
 
-R2: Given N types of known liquid data and 2 levels of an unknown liquid data, could we build a model that predicts its content level? If we can build a model, how many types of known liquid we need in order to achieve a decent performance? Put it differently, we want to explore how the prediction model's performance changes as the number of known liquid ($N$) used for training is varied.
+R2: Given N (N = 1,...,number of liquid - 1) types of known liquid data and 2 levels (the empty and full levels) of an unknown liquid data, could we build a prediction model that predicts its content level? If we can build a model, how many types of known liquid we need in order to achieve a decent performance? Put it differently, we want to explore how the prediction model's performance changes as the number of known liquid ($N$) used for training is varied.
 
 
 \subsection{Exploration on R1}
@@ -201,10 +201,9 @@ We designed an MLP with one input layer of 21 nodes, one output layer with 1 nod
 \end{figure}
 We used squared-error loss function.\begin{equation} E=(f(x)-y)^2/2\end{equation} We used back-propagation algorithm, which is a fast way of computing gradients, to learn all the weights in the MLP. We used a mini-batch size of 100 while learning the weights. We also tuned the following parameters: learning rate, momentum, the number of epochs trained. Based on the empirical results, we finally set these parameters to be 0.3,0.2 and 2000.
 
-\subsubsection{Evaluation Strategy}
-For a liquid type j, given an input feature vector \[[\mathtt{x}_{i,1},...,\mathtt{x}_{i,21}]\], our goal is to predict its content level \[\mathtt{y}_{i}\].  
 
-We use the mean absolute error as the evaluation 
+\subsubsection{Evaluation Strategy}
+We used the mean absolute error (MAE) to evaluate the performance of proposed prediction models. We train regression models using the combined data set of N (N = 1...number of liquid - 1) known liquid and 2 levels (full and empty levels) of unknown liquid data. To examine how a regression model's performance change when the number of known liquid used for training increases, we gradually increase the number of liquid used from 1 to 8 (9 is the total number of liquid we have). If we use N number of liquid for training, then we will test the model with each one of the rest \[9-N\] liquid data. Therefore, the number of rounds of evaluations for the model trained with N number of liquid data can be expressed as the following equation: \[C^9_N * (9-N)\], \[ N = 1...8\]. For example, the number of rounds of evaluations for the model train with 5 types of liquid data is \[C^9_5 * (9-5) = 630\].     
 
 \subsubsection{Results}
 
