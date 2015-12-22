@@ -202,7 +202,9 @@ We designed an MLP with one input layer of 21 nodes, one output layer with 1 nod
 We used squared-error loss function.\begin{equation} E=(f(x)-y)^2/2\end{equation} We used back-propagation algorithm, which is a fast way of computing gradients, to learn all the weights in the MLP. We used a mini-batch size of 100 while learning the weights. We also tuned the following parameters: learning rate, momentum, the number of epochs trained. Based on the empirical results, we finally set these parameters to be 0.3,0.2 and 2000.
 
 \subsubsection{Evaluation Strategy}
-Todo: explain the possible combinations for each case.
+For a liquid type j, given an input feature vector \[[\mathtt{x}_{i,1},...,\mathtt{x}_{i,21}]\], our goal is to predict its content level \[\mathtt{y}_{i}\].  
+
+We use the mean absolute error as the evaluation 
 
 \subsubsection{Results}
 
