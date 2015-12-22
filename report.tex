@@ -245,17 +245,6 @@ While training a regression model, we use data from $N$ liquids and also data fr
 
 One potential problem with this strategy is that the number of samples from $N$ types of liquid $(N * 1100)$ is normally much higher than the number of samples from the 2 levels of the unknown liquid (200). For example, if we train the regression model with $N = 8$ liquids, we have 8800 samples from the known liquid but only 200 samples from the unknown liquid. The effect of these 200 samples might be "washed" out by those 8800 samples. To tackle this problem, we proposed a reweight method: if $N$ liquids are used for training, then we will duplicate the 200 samples from the unknown liquid by $N$ times. Thus, there will be $N * 1100 + N * 200$ samples for training. We name this strategy as $\mathtt{Strategy}^2$.
 
-\subsubsection{Results}
-In this section, we show the results of the two regression models (Ridge regression and MLP) using two Reweight samples strategies ($\mathtt{Strategy}^1$,$\mathtt{Strategy}^2$). The overall results are described in Table~\ref{table:result}.
-
-\begin{itemize}
-\item Figure~\ref{fig:ridge} shows the performance of the two re-weighting strategies using ridge regression model. The X-axis is the number of liquids used for training.
-
-\item Figure~\ref{fig:nn} shows the performance of the two re-weighting strategies using a multi-layer perceptron. The X-axis is the number of liquid used for training.
-
-\item Figure~\ref{fig:water} shows the predictions made by the two models when tested on water, and trained using all the other liquids using the $\mathtt{Strategy}^2$ strategy. This particular testcase presented the best results in our dataset for both the models.
-\end{itemize}
-
 \begin{table}[t]
 \caption{Overall regression performance: mean absolute error in quantity level prediction for various source set sizes.}
 \label{table:result}
@@ -276,6 +265,18 @@ In this section, we show the results of the two regression models (Ridge regress
 \end{tabular}
 \end{center}
 \end{table}
+
+\subsubsection{Results}
+In this section, we show the results of the two regression models (Ridge regression and MLP) using two Reweight samples strategies ($\mathtt{Strategy}^1$,$\mathtt{Strategy}^2$). The overall results are described in Table~\ref{table:result}.
+
+\begin{itemize}
+\item Figure~\ref{fig:ridge} shows the performance of the two re-weighting strategies using ridge regression model. The X-axis is the number of liquids used for training.
+
+\item Figure~\ref{fig:nn} shows the performance of the two re-weighting strategies using a multi-layer perceptron. The X-axis is the number of liquid used for training.
+
+\item Figure~\ref{fig:water} shows the predictions made by the two models when tested on water, and trained using all the other liquids using the $\mathtt{Strategy}^2$ strategy. This particular testcase presented the best results in our dataset for both the models.
+\end{itemize}
+
 
 \begin{figure}[htb]
 \centering
