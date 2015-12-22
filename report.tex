@@ -185,7 +185,7 @@ We examine the following research questions.
 
 \paragraph{R1} For a given liquid, can we build a classifier that can tell its content level? This question is meant to validate the results that our previous paper has discovered using the new data set we have collected.
 
-\paragraph{R2} Given N (N = 1,...,number of liquid - 1) types of known liquid data and 2 levels (the empty and full levels) of an unknown liquid data, could a prediction model be learned to predict its content level? If we can build a model, how many types of known liquid we need in order to achieve a decent performance? Put it differently, we want to explore how the prediction model's performance changes as the number of known liquid ($N$) used for training is varied. Do the two levels of the unknown liquid data help improve the prediction model? 
+\paragraph{R2} Given N (N = 1,...,number of liquid - 1) types of known liquid data and 2 levels (the empty and full levels) of an unknown liquid data, could a prediction model be learned to predict the unknown liquid's content level? If we can build a model, how many types of known liquid we need in order to achieve a decent performance? Put it differently, we want to explore how the prediction model's performance changes as the number of known liquid ($N$) used for training is varied. Do the two levels of the unknown liquid data help improve the prediction model? 
 
 
 \subsection{Exploration on R1}
@@ -267,7 +267,7 @@ One potential problem with this strategy is that the number of samples from $N$ 
 \end{table}
 
 \subsubsection{Results}
-In this section, we show the results of the two regression models (Ridge regression and MLP) using two Reweight samples strategies ($\mathtt{Strategy}^1$,$\mathtt{Strategy}^2$). The overall results are described in Table~\ref{table:result}.
+In this section, we show the results of the two regression models (Ridge regression and MLP) using two Reweight samples strategies ($\mathtt{Strategy}^1$,$\mathtt{Strategy}^2$). The overall results are described in Table~\ref{table:result}. Note that all training processes include the 2 level data (empty and full levels) from the testing liquid.
 
 \begin{itemize}
 \item Figure~\ref{fig:ridge} shows the performance of the two re-weighting strategies using ridge regression model. The X-axis is the number of liquids used for training.
