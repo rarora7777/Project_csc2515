@@ -12,7 +12,7 @@
 \newcommand{\x}{\mathbf{x}}
 \newcommand{\W}{\mathbf{W}}
 
-\title{SonicSmart: Domain Adaptation for Quantity Predicting Acoustic Features}
+\title{SonicSmart: Domain Adaptation for Quantity Prediction using Acoustic Features}
 
 
 \author{
@@ -54,6 +54,16 @@ We present a comparative analysis of ridge-regularized linear regression and neu
 \end{abstract}
 
 \section{Introduction}
+Automatically sensing the amount of content in a container can benefit many practical applications. It can provide an understanding of when and how an item has been used. For example, households can use such information to plan what items to buy and when to buy them, which may lead to fewer shopping trips~\cite{fram1990distressed}, less chance of running out of items and reduced food waste due to decreased overbuying ~\cite{ganglbauer2012creating}. However, it is challenging to have a practice approach to sense the content levels for household items accurately and economically. Many existing approaches are intrusive (e.g., the sensor unit needs to be in physical contact with the measured content~\cite{canbolat2009novel}) and usually work for large scale containers only. Some others that work for portable containers are typically designed as special purpose containers (e.g., smart pill bottle~\cite{adheretech}, smart water cups~\cite{cuptime},~\cite{vessyl}]). They cannot be used for common household containers such as cartons, cans, plastic boxes, and glass bottles and are typically expensive. Many approaches are not flexible enough to apply to containers of different physical shapes~\cite{dietz2002wireless}. Overall, none of the existing solutions we know of provides a reusable, non-intrusive solution for sensing the amount of common household items in their differently sized and shaped containers made from myriad materials.
+
+To tackle this problem, one of the authors recently presented a portable and reusable acoustic sensor design and the related learning system to predict the content levels of 19 common household items (e.g., carton milk, laundry detergent, salt)~\cite{fan2015soqr}. The sensor unit can be attached to a side surface of a container. It outputs a short duration acoustic signal to excite the container and its content. At the same time, it also records the impulse respond of the item. By extracting the acoustic features from the impulse response that are recorded for different content levels, a Support Vector Machine model can be trained to reliably predict the (relative) amount of content in the container.
+
+One research question left open is that even with the container and environmental conditions remaining constant, different prediction models have to be built for different content types individually. For example, a classifier trained for milk in a container cannot directly predict the quantity of a different content (e.g., orange juice) placed in the same container. However, collecting labeled data samples for various content types at different content levels to train a classifier is a tiresome and time-consuming task. It requires a consumer’s intervention in the data collection procedure. She needs to remove certain amount of content each time to achieve different content levels (i.e., she has to pour out 10 percent of the content from a full container to train for the 90 percent level, and so on). In addition, it might be impossible to cover all content types. Thus, the research question we tackle in this project is a classic transfer learning problem: given labeled samples collected for a few types of content in a container, is it possible to create a generalized model to predict the content level for novel items when stored in the same container?
+
+
+
+
+
 \label{sec:introduction}
 %% \subsection{Double-blind reviewing}
 
