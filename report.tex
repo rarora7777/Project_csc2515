@@ -147,9 +147,7 @@ The range of raw features varies differently for different MFCCs and LPC. This m
 \[\mathbf{x'} = \frac{\mathbf{x}-\overline{\mathbf{x}}}{\sigma(\mathbf{x})}\]
 where $\overline{\mathbf{x}}$ represents the mean of a distribution of feature vector $\mathbf{x}$, and $\sigma(\mathbf{x})$ its standard deviation.
 \section{Feature Exploration}
-todo: exploration and visualization of all features.
-
-1. shows the feature change over different levels for one liquid
+TODO: some fitures that demonstrate the exploration and visualization of all features. For example, the figures that show the feature change over different levels for one liquid.
 
 
 \section{Evaluation}
@@ -218,13 +216,27 @@ For a regression model and the number of liquid N used for training, we compute 
 \subsubsection{Reweight Samples}
 While training a regression model, we use data from N types of liquid and also data from 2 levels (empty and full) of the unknown liquid that our model is going to predict content level on. One strategy is simply combining them together and train the model, which is named \[Strategy^1\]. 
 
-One potential problem with this strategy is that the number of samples from N types of liquid (N * 1100) is normally much higher than the number of samples from the 2 levels of the unknown liquid (200). For example, if we train the regression model with N = 8 types of liquid, we have 8800 samples from the known liquid but only 200 samples from the unknown liquid. The effect of these 200 samples might be "washed" out by those 8800 samples. To tackle this problem, we proposed a reweight method: if N types of known liquid are used for training, then we will duplicate the 200 samples from the unknown liquid by N times. Thus, there will be N * 1100 + N * 200 samples for training. We name this strategy as \[Strategy^2\].
+One potential problem with this strategy is that the number of samples from N types of liquid (N * 1100) is normally much higher than the number of samples from the 2 levels of the unknown liquid (200). For example, if we train the regression model with N = 8 types of liquid, we have 8800 samples from the known liquid but only 200 samples from the unknown liquid. The effect of these 200 samples might be "washed" out by those 8800 samples. To tackle this problem, we proposed a reweight strategy: if N types of known liquid are used for training, then we will duplicate the 200 samples from the unknown liquid by N times. Thus, there will be N * 1100 + N * 200 samples for training. We name this strategy as \[Strategy^2\].
 
 \subsubsection{Results}
 In this section, we show the results of the two regression models (Ridge regression and MLP) using two Reweight samples strategies(\[Strategy^1\],\[Strategy^2\]).
 
+TODO: 
+1. the figure shows the performance of two re-weight strategies using ridge regression model. The x-axis is the number of liquid used for training.
+
+2. the figure shows the performance of two re-weight strategies using ridge regression model. The x-axis is the number of liquid used for training.
+
+3. the mean and the standard deviation of the prediction on a given liquid 
+
 \section{Conclusion}
 todo: conclusion goes here.
+
+
+
+
+
+
+
 %
 %\subsection{Retrieval of style files}
 %
