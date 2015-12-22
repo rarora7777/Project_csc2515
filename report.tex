@@ -116,19 +116,21 @@ We adopt a similar sensor design to our previous paper~\cite{fan2015soqr}. Inste
   \label{fig:set-up}
 \end{figure}
 
-We follow the same data collection protocol as we have used in our previous paper~\cite{fan2015soqr}. A brief summary of the data collection steps is presented below:
+We follow the same data collection protocol as we have used in our previous paper~\cite{fan2015soqr}. A brief summary of the data collection steps is presented below.
+\begin{enumerate}
+\item Choose a liquid for which data has not been collected yet.
 
-1. Choose one liquid from the 9 candidate liquid.
+\item Start from the empty level. Start the mobile data collection application. The application probes the container and records the impulse response. This is repeated 100 times to suppress the influence of noise.
 
-2. Start from the empty level. Start the mobile data collection application. The application will start probing the container and record the impulse response for 100 times.
+\item After it finishes data collection for the current level, we measure an amount of the liquid equivalent to 10 percent of the volume of the container and pour this liquid into the container. We wait until the liquid settles and then re-start the mobile application for data collection.
 
-3. After it finishes data collection for current level, we measure 10 percent of the liquid using a beak and pour the liquid into the container. We wait until the liquid settles and then start the mobile application for data collection.
+\item We repeat step 3 until the container is fully filled.
 
-4. We repeat step 3 until the container is fully filled.
+\item We clean the container and perform the above 4 steps repeatedly until we finish collecting data samples for all the 9 liquids.
 
-5. We clean the container and start the above 1-4 steps until we finish collecting data samples for all 9 liquid.
+\end{enumerate}
 
-For the data set of each liquid, there are 11 content levels in total and 100 sample audio recordings per content level. Thus, there are 1100 sample recordings per liquid and 9900 for all liquid.   
+For the data set of each liquid, there are 11 content levels in total and 100 sample audio recordings per content level. Thus, there are 1100 sample recordings per liquid, and a total of 9900 samples for all liquids.
 
 \section{Feature Extraction}
 To make use of these raw audio samples, we extract and use the following two types of acoustic features: Mel-frequency cepstral coefficients (MFCCs) and linear predictive coefficients (LPC). MFCCs capture properties of the real cepstral of a short-time signal derived from the fast Fourier transform of an acoustic signal. It has been used for speech recognition and scene understanding~\cite{kunze2007symbolic}~\cite{fan2014public}, etc. LPC calculates the power spectrum of a signal and has been demonstrated efficient for formant analysis and speech analysis. 
@@ -155,10 +157,10 @@ We examine the following research questions.
 
 R1: For a given liquid, can we build a classifier that can tell its content level? This question is meant to validate the results that our previous paper has discovered using the new data set we have collected.
 
-R2: Given N types of known liquid data and 2 levels of an unknown liquid data, could we build a model that predicts its content level? If we can build a model, how many types of known liquid we need in order to achieve a decent performance? Put it differently, we want to explore how the prediction model's performance change as the number of known liquid (N) used for training increases. 
+R2: Given N types of known liquid data and 2 levels of an unknown liquid data, could we build a model that predicts its content level? If we can build a model, how many types of known liquid we need in order to achieve a decent performance? Put it differently, we want to explore how the prediction model's performance changes as the number of known liquid ($N$) used for training is varied.
 
 \subsection{Exploration on R1}
-The classification problem here is to predict the content level from 11 possible levels (0 to 1 with 10 percent as the interval) given the extracted 21 standardized MFCC and LPC features computed from an impulse response sound clip recorded using our sensor. We train a support vector machine classifier using libSVM~\cite{chang2011libsvm}. For evaluation, we did 10-fold cross validation. The evaluation result is shown in Table~\ref{table:svmEval}. With the data set we collected, we were able to achieve the similar performance as ~\cite{fan2015soqr}. 
+The classification problem here is to predict the content level from 11 possible levels (0 to 1 with 10 percent as the interval) given the extracted 21 standardized MFCC and LPC features computed from an impulse response sound clip recorded using our sensor. We train a support vector machine classifier using libSVM~\cite{chang2011libsvm}. For evaluation, we did 10-fold cross validation. The evaluation result is shown in Table~\ref{table:svmEval}. With the data set we collected, we were able to achieve similar performance as~\cite{fan2015soqr}.
 
 \begin{table}[t]
 \caption{Evaluation of classification performance of an SVM classifier utilizing RBF kernel.}
