@@ -311,11 +311,19 @@ In this section, we show the results of the two regression models (Ridge regress
 
 
 \section{Conclusion}
-todo: conclusion goes here.
+In this paper, we tackle a domain adaption problem by learning a regression model to predict the content level of a new type of liquid based on a number of known types of liquid data stored in the same container. Our exploration demonstrate the following three findings: 
+\begin{enumerate}
+\item It is possible to build a decent regression model to predict the content level of a new type of liquid based only on a number of known types of liquid and 2 levels (empty and full) of the predicting liquid.
 
+\item The MLP model performs better than the ridge regression model if trained on the same data set.
+
+\item Reweighting 2 levels of the predicting liquid data helps improve the model's performance of the ridge regression model. However, it does not seem to help improve the MLP's performance a lot.
+
+\item As the number of liquid used for training increases, both ridge regression and MLP performance improve. For MLP model, when trained on 4 types of liquid, the model's performance become roughly stable (MAE is around 0.07).   
+\end{enumerate}
 
 \subsubsection*{Acknowledgments}
-We thank Shikhar Sharma and Khai Truong for various helpful discussions and ideas.
+We thank Shikhar Sharma and Prof. Khai Truong for various helpful discussions and ideas.
 
 
 \bibliography{report}
