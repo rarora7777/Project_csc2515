@@ -138,7 +138,14 @@ where, $S$ is the number of frames during a sweep. That is, $S=(44100*0.01)/(W*5
 
 Finally, for the identified portion, we extract 13 MFCCs and 10 LPC for each frame, and them compute the average value of each feature. We remove the first MFCC feature because the distribution of this feature over all levels of any type of liquid are random and. We also remove the last LPC feature because it is always the same for all levels of all liquid types. Therefore, we have 21 features for learning our prediction models.
 
-todo: explanation of the standardization on features.
+\begin{figure}
+\centering
+  \includegraphics[width=\linewidth]{standadization_equation.PNG}
+  \label{fig:equation_std}
+\end{figure}
+
+The range of raw features varies differently for different MFCCs and LPC. This might affect the optimization of our objective functions while training our prediction models. Therefore, we normalize each one of the 21 features using the following standardization equation ~\ref{fig:equation_std}.
+
 
 \section{Feature Exploration}
 todo: exploration and visualization of all features.
@@ -156,15 +163,29 @@ R1: For a given liquid, can we build a classifier that can tell its content leve
 
 R2: Given N types of known liquid data and 2 levels of an unknown liquid data, could we build a model that predicts its content level? If we can build a model, how many types of known liquid we need in order to achieve a decent performance? Put it differently, we want to explore how the prediction model's performance change as the number of known liquid (N) used for training increases. 
 
+
 \subsection{Exploration on R1}
 The classification problem here is to predict the content level from 11 possible levels (0 to 1 with 10 percent as the interval) given the extracted 21 standardized MFCC and LPC features computed from an impulse response sound clip recorded using our sensor. We train a support vector machine classifier using libSVM~\cite{chang2011libsvm}. For evaluation, we did 10-fold cross validation. The evaluation result is shown in Table X. With the data set we collected, we were able to achieve the similar performance as ~\cite{fan2015soqr}. 
 
-
 \subsection{Exploration on R2}
-
+As the prediction class (content level) is a continuous value between 0 and 1, we can treat the prediction as regression.
+  
 \subsubsection{Ridge Regression}
 
-\subsubsection{Neural Network}
+\subsubsection{Artificial Neural Network}
+Ridge Regression cannot handle the potential non-linear relation between the features and the target value. To cope with this problem, we further explored a non-linear regression model: artificial neural network. Specifically, we adopted a Multi-Layer Perceptron (MLP), which is a feed-forward artificial neural network model. By having nonlinear activation functions, MLP can distinguish the data that is not linearly separable. 
+
+We designed an MLP with 2 hidden layers. We chose 2 hidden layers for the following reasons. We expected the nodes in the first hidden layer to learn more complex and informative features based on the input features. We expected the second hidden layers to learn the latent variables that determine the content level. In our case, the hidden variables are physical properties that could affect the sound absorption and reflection while traveling through the liquid. For the number of nodes in the first hidden layer, we chose (21 + 11)/2 for the first hidden layer (21 is the dimension of the input feature vector and 11 is the number of target values) by following the guidance of MLP design in a machine learning and data mining toolkit WEKA~\cite{hall2009weka}. It proposes the number of nodes for the hidden layer can be chose as (the number of attributes + the number of classes) / 2. For the number of nodes in the second hidden layer, we chose 4 because as we introduced earlier in the paper that there were 4 major physical properties (viscosity, specific heat, density, and temperature) that affect sound absorption and refection in liquid. To handle the non-linearity, we used a sigmoid function as the activation function. The MLP is visualized in Figure X.
+
+
+ 
+ 
+
+\subsubsection{Evaluation Strategy}
+Todo: explain the possible combinations for each case.
+
+\subsubsection{Results}
+
 
 \section{Conclusion}
 todo: conclusion goes here.
