@@ -9,6 +9,8 @@
 %\documentstyle[nips14submit_09,times,art10]{article} % For LaTeX 2.09
 
 \DeclareMathOperator*{\argmax}{arg\,max}
+\newcommand{\x}{\mathbf{x}}
+\newcommand{\W}{\mathbf{W}}
 
 \title{SonicSmart: Domain Adaptation for Quantity Predicting Acoustic Features}
 
@@ -187,6 +189,9 @@ Water & 0.999 & 0.999 & 0.999 \\
 As the prediction class (content level) is a continuous value between 0 and 1, we can treat the prediction as regression.
   
 \subsubsection{Ridge Regression}
+We use linear regression with Tikhonov regularization, also known as ridge regression to perform the quantity prediction. Ridge regression regularizes on the 2-norm of the regression parameters, and has the following least-squares optimization functional.
+\[\min_\W \lVert\W\x^T-\mathbf{y}\rVert^2 + \lambda\lVert\W\rVert^2\]
+where $\lambda$ is the regularization hyperparameter. Since, this is a convex problem, it can be solved in the closed form. We use the implementation provided by Yan et al~\cite{yan2015improving} for solving the optimization problem using the normal equation. After empirical analysis, we found that the value of 0.01 for the hyperparameter $\lambda$ gives the best results, and all our results reported in this paper use the same value.
 
 \subsubsection{Artificial Neural Network}
 Ridge Regression cannot handle the potential non-linear relation between the features and the target value. To cope with this problem, we further explored a non-linear regression model: artificial neural network. Specifically, we adopted a Multi-Layer Perceptron (MLP), which is a feed-forward artificial neural network model. By having nonlinear activation functions, MLP can distinguish the data that is not linearly separable. 
