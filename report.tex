@@ -146,9 +146,24 @@ Finally, for the identified portion, we extract 13 MFCCs and 10 LPC for each fra
 The range of raw features varies differently for different MFCCs and LPC. This might affect the optimization of our objective functions while training our prediction models. Therefore, we normalize each one of the 21 features using the following standardization equation.
 \[\mathbf{x'} = \frac{\mathbf{x}-\overline{\mathbf{x}}}{\sigma(\mathbf{x})}\]
 where $\overline{\mathbf{x}}$ represents the mean of a distribution of feature vector $\mathbf{x}$, and $\sigma(\mathbf{x})$ its standard deviation.
-\section{Feature Exploration}
-TODO: some fitures that demonstrate the exploration and visualization of all features. For example, the figures that show the feature change over different levels for one liquid.
 
+\section{Feature Exploration}
+In order to explore the viability of a transfer learning approach for adapting or generalizing our models across various liquids, we first ascertained that the various liquid feature {\em domains} showed similar patterns across the quantity levels of the liquid in the container. Figure~\ref{fig:features} visualizes the LPC features for two liquids from the dataset. While we can observe many differences between the features for the two liquids, it is clear that the features follow many similar patterns when observed from the empty level to the full one. Correspondingly, we visualize the distance between the features by scaling them to 2-dimensions using multi-dimensional scaling. The visualization for the same pair of liquids is shown in Figure~\ref{fig:mds}. It can be clearly seen that the features for similar levels occupy similar regions of the MDS manifold surface, irregardless of the liquid.
+
+\begin{figure}[tbh]
+\centering
+\includegraphics[width=0.49\linewidth]{lpc_3.png}
+\includegraphics[width=0.49\linewidth]{lpc_4.png}
+\caption{Visualizing LPC features for two liquids from the dataset: milk and olive oil.}
+\label{fig:features}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.8\linewidth]{mds_3_4.png}
+\caption{Projecting the features for liquids 3 and 4 of the dataset (milk and olive oil) to a two-dimensional plane using MDS. Note that features representing similar levels are close together in the plane.}
+\label{fig:mds}
+\end{figure}
 
 \section{Evaluation}
 In this section, we report our exploration on the proposed research questions.
@@ -221,23 +236,51 @@ One potential problem with this strategy is that the number of samples from $N$ 
 \subsubsection{Results}
 In this section, we show the results of the two regression models (Ridge regression and MLP) using two Reweight samples strategies ($\mathtt{Strategy}^1$,$\mathtt{Strategy}^2$).
 
-TODO: 
-1. the figure shows the performance of two re-weight strategies using ridge regression model. The x-axis is the number of liquid used for training.
+\begin{itemize}
+\item Figure~\ref{fig:ridge} shows the performance of the two re-weighting strategies using ridge regression model. The X-axis is the number of liquids used for training.
 
-2. the figure shows the performance of two re-weight strategies using ridge regression model. The x-axis is the number of liquid used for training.
+\item Figure~\ref{fig:nn} shows the performance of the two re-weighting strategies using a multi-layer perceptron. The X-axis is the number of liquid used for training.
 
-3. the mean and the standard deviation of the prediction on a given liquid 
+\item Figure~\ref{fig:water} shows the predictions made by the two models when tested on water, and trained using all the other liquids using the $\mathtt{Strategy}^2$ strategy. This particular testcase presented the best results in our dataset for both the models.
+\end{itemize}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\linewidth]{source_set_size_ridge.png}
+\caption{Ridge regression prediction results.}
+\label{fig:ridge}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\linewidth]{source_set_size_nn.png}
+\caption{Multi-layer perceptron prediction results.}
+\label{fig:nn}
+\end{figure}
+
+\begin{figure}[htb]
+\centering
+\begin{subfigure}{\linewidth}
+\includegraphics[width=0.49\linewidth]{train1-8_test9_regress.png}
+\includegraphics[width=0.49\linewidth]{train1-8_test9_regress_prediction.png}
+\caption*{Ridge regression}
+\end{subfigure}
+\begin{subfigure}{\linewidth}
+\includegraphics[width=0.49\linewidth]{train1-8_test9_nn.png}
+\includegraphics[width=0.49\linewidth]{train1-8_test9_nn_prediction.png}
+\caption*{Multi-layer perceptron}
+\end{subfigure}
+\caption{Prediction results targeting the liquid {\em water}, while using all other liquids used as sources for domain adaptation. Both the models use $\mathtt{Strategy}^2$. The blue line in the left column represents the mean absolute error.}
+\label{fig:water}
+\end{figure}
+
 
 \section{Conclusion}
 todo: conclusion goes here.
 
 
 \subsubsection*{Acknowledgments}
-
-Use unnumbered third level headings for the acknowledgments. All
-acknowledgments go at the end of the paper. Do not include 
-acknowledgments in the anonymized submission, only in the 
-final paper. 
+We thank Shikhar Sharma and Khai Truong for various helpful discussions and ideas.
 
 
 \bibliography{report}
