@@ -86,9 +86,9 @@ We present a comparative analysis of ridge-regularized linear regression and neu
 
 \section{Data Collection}
 \label{sec:dataCollection}
-Several physical properties of liquid could potentially affect sound absorption and reflection rates through it~\cite{parthasarathy1955sound}. For example, viscosity, specific heats, density and temperature~\cite{absorb}. To choose a set of liquid that are commonly found in a household and cover as many different physical properties as possible, we finally chose 9 types of liquid for our experiment primarily based on their viscosity and density. The 9 different types of liquid we have chosen are: water, tonic water, milk, orange juice, apple juice, canola oil, olive oil, soy sauce and syrup.   
+Several physical properties of liquid could potentially affect sound absorption and reflection rates through it~\cite{parthasarathy1955sound}. For example, viscosity, specific heat ratio, density and temperature~\cite{absorb}. To choose a set of liquid that are commonly found in a household and cover as many different physical properties as possible, we finally chose 9 types of liquid for our experiment primarily based on their viscosity and density. The 9 different types of liquid we have chosen are: water, tonic water, milk, orange juice, apple juice, canola oil, olive oil, soy sauce and syrup.
 
-We adopt a similar sensor design to our previous paper~\cite{fan2015soqr}. Instead of 3d printing a case to hold a microphone and a speaker together, we directly attach two components to a side surface of a bottle and hold them firmly in place with electric tape. The sensor unit and the bottle are kept unchanged for collecting data samples of different liquid types in our study. The set up is shown in Figure ~\ref{fig:set-up}. The data sampling application outputs a 20~20K Hz sine wave sweep as the probing sound and records at the same time using 44.1KHz 16 bit depth sampling method. The sweep sound itself is very brief, which is 0.1 second long. The recording lasts 1 more second after the sweep stops to capture the entire impulse response. Figure X shows three spectrograms of three recordings when the bottle fills water to empty, half and completely full levels. As the content level changes, the different frequencies are affected differently. This can be understood as an acoustic fingerprint of the corresponding content level.  
+We adopt a similar sensor design to our previous paper~\cite{fan2015soqr}. Instead of 3D printing a case to hold a microphone and a speaker together, we directly attach two components to a side surface of a bottle and hold them firmly in place with electric tape. The sensor unit and the bottle are kept unchanged for collecting data samples of different liquids used in our study. The set up is shown in Figure ~\ref{fig:set-up}. The data sampling application outputs a 20~20K Hz sine wave sweep as the probing sound and records at the same time using 44.1KHz 16 bit depth sampling method. The sweep sound itself is very brief, which is 0.1 second long. The recording lasts 1 more second after the sweep stops to capture the entire impulse response. Figure~\ref{fig:spectrograms} shows three spectrograms of three recordings when the bottle fills water to empty, half and completely full levels. As the content level changes, the different frequencies are affected differently. This can be understood as an acoustic fingerprint of the corresponding content level.
 \begin{figure}
 \centering
   \includegraphics[width=0.5\linewidth]{setup1.jpg}
@@ -113,7 +113,7 @@ We adopt a similar sensor design to our previous paper~\cite{fan2015soqr}. Inste
 %  \includegraphics[width=0.3\linewidth]{water_half.png}
 %  \includegraphics[width=0.3\linewidth]{water_full.png}
   \caption{Spectrograms of impulse response recordings when the bottle contains water.}
-  \label{fig:set-up}
+  \label{fig:spectrograms}
 \end{figure}
 
 We follow the same data collection protocol as we have used in our previous paper~\cite{fan2015soqr}. A brief summary of the data collection steps is presented below.
