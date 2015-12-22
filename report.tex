@@ -323,6 +323,8 @@ In this paper, we tackle a domain adaption problem by learning a regression mode
 \item As the number of liquid used for training increases, both ridge regression and MLP performance improve. For MLP model, when trained on 4 types of liquid, the model's performance become roughly stable (MAE is around 0.07).   
 \end{enumerate}
 
+In addition, we evaluated a MLP model trained on 1 type of liquid data and the 2 level data from the testing liquid and compared to another MLP model trained on the same type of liquid data and without the 2 level data from the testing liquid. The MAE for these two cases are: 0.06 and 0.1773. Though not a thoroughly evalution, it shows that the two levels from the testing liquid helps the MLP model trained on existing liquid adapting to the new liquid.  
+
 \subsubsection*{Acknowledgments}
 We thank Shikhar Sharma and Prof. Khai Truong for various helpful discussions and ideas.
 
