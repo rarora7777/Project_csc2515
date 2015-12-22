@@ -5,6 +5,7 @@
 \usepackage{graphicx}
 \usepackage{subcaption}
 \usepackage{amsmath}
+\usepackage{tabularx}
 %\documentstyle[nips14submit_09,times,art10]{article} % For LaTeX 2.09
 
 \DeclareMathOperator*{\argmax}{arg\,max}
@@ -85,9 +86,9 @@ We present a comparative analysis of ridge-regularized linear regression and neu
 
 \section{Data Collection}
 \label{sec:dataCollection}
-Several physical properties of liquid could potentially affect sound absorption and reflection rates through it~\cite{parthasarathy1955sound}. For example, viscosity, specific heats, density and temperature~\cite{absorb}. To choose a set of liquid that are commonly found in a household and cover as many different physical properties as possible, we finally chose 9 types of liquid for our experiment primarily based on their viscosity and density. The 9 different types of liquid we have chosen are: water, tonic water, milk, orange juice, apple juice, canola oil, olive oil, soy sauce and syrup.   
+Several physical properties of liquid could potentially affect sound absorption and reflection rates through it~\cite{parthasarathy1955sound}. For example, viscosity, specific heat ratio, density and temperature~\cite{absorb}. To choose a set of liquid that are commonly found in a household and cover as many different physical properties as possible, we finally chose 9 types of liquid for our experiment primarily based on their viscosity and density. The 9 different types of liquid we have chosen are: water, tonic water, milk, orange juice, apple juice, canola oil, olive oil, soy sauce and syrup.
 
-We adopt a similar sensor design to our previous paper~\cite{fan2015soqr}. Instead of 3d printing a case to hold a microphone and a speaker together, we directly attach two components to a side surface of a bottle and hold them firmly in place with electric tape. The sensor unit and the bottle are kept unchanged for collecting data samples of different liquid types in our study. The set up is shown in Figure ~\ref{fig:set-up}. The data sampling application outputs a 20~20K Hz sine wave sweep as the probing sound and records at the same time using 44.1KHz 16 bit depth sampling method. The sweep sound itself is very brief, which is 0.1 second long. The recording lasts 1 more second after the sweep stops to capture the entire impulse response. Figure X shows three spectrograms of three recordings when the bottle fills water to empty, half and completely full levels. As the content level changes, the different frequencies are affected differently. This can be understood as an acoustic fingerprint of the corresponding content level.  
+We adopt a similar sensor design to our previous paper~\cite{fan2015soqr}. Instead of 3D printing a case to hold a microphone and a speaker together, we directly attach two components to a side surface of a bottle and hold them firmly in place with electric tape. The sensor unit and the bottle are kept unchanged for collecting data samples of different liquids used in our study. The set up is shown in Figure ~\ref{fig:set-up}. The data sampling application outputs a 20~20K Hz sine wave sweep as the probing sound and records at the same time using 44.1KHz 16 bit depth sampling method. The sweep sound itself is very brief, which is 0.1 second long. The recording lasts 1 more second after the sweep stops to capture the entire impulse response. Figure~\ref{fig:spectrograms} shows three spectrograms of three recordings when the bottle fills water to empty, half and completely full levels. As the content level changes, the different frequencies are affected differently. This can be understood as an acoustic fingerprint of the corresponding content level.
 \begin{figure}
 \centering
   \includegraphics[width=0.5\linewidth]{setup1.jpg}
@@ -112,22 +113,24 @@ We adopt a similar sensor design to our previous paper~\cite{fan2015soqr}. Inste
 %  \includegraphics[width=0.3\linewidth]{water_half.png}
 %  \includegraphics[width=0.3\linewidth]{water_full.png}
   \caption{Spectrograms of impulse response recordings when the bottle contains water.}
-  \label{fig:set-up}
+  \label{fig:spectrograms}
 \end{figure}
 
-We follow the same data collection protocol as we have used in our previous paper~\cite{fan2015soqr}. A brief summary of the data collection steps is presented below:
+We follow the same data collection protocol as we have used in our previous paper~\cite{fan2015soqr}. A brief summary of the data collection steps is presented below.
+\begin{enumerate}
+\item Choose a liquid for which data has not been collected yet.
 
-1. Choose one liquid from the 9 candidate liquid.
+\item Start from the empty level. Start the mobile data collection application. The application probes the container and records the impulse response. This is repeated 100 times to suppress the influence of noise.
 
-2. Start from the empty level. Start the mobile data collection application. The application will start probing the container and record the impulse response for 100 times.
+\item After it finishes data collection for the current level, we measure an amount of the liquid equivalent to 10 percent of the volume of the container and pour this liquid into the container. We wait until the liquid settles and then re-start the mobile application for data collection.
 
-3. After it finishes data collection for current level, we measure 10 percent of the liquid using a beak and pour the liquid into the container. We wait until the liquid settles and then start the mobile application for data collection.
+\item We repeat step 3 until the container is fully filled.
 
-4. We repeat step 3 until the container is fully filled.
+\item We clean the container and perform the above 4 steps repeatedly until we finish collecting data samples for all the 9 liquids.
 
-5. We clean the container and start the above 1-4 steps until we finish collecting data samples for all 9 liquid.
+\end{enumerate}
 
-For the data set of each liquid, there are 11 content levels in total and 100 sample audio recordings per content level. Thus, there are 1100 sample recordings per liquid and 9900 for all liquid.   
+For the data set of each liquid, there are 11 content levels in total and 100 sample audio recordings per content level. Thus, there are 1100 sample recordings per liquid, and a total of 9900 samples for all liquids.
 
 \section{Feature Extraction}
 To make use of these raw audio samples, we extract and use the following two types of acoustic features: Mel-frequency cepstral coefficients (MFCCs) and linear predictive coefficients (LPC). MFCCs capture properties of the real cepstral of a short-time signal derived from the fast Fourier transform of an acoustic signal. It has been used for speech recognition and scene understanding~\cite{kunze2007symbolic}~\cite{fan2014public}, etc. LPC calculates the power spectrum of a signal and has been demonstrated efficient for formant analysis and speech analysis. 
@@ -161,12 +164,31 @@ We examine the following research questions.
 
 R1: For a given liquid, can we build a classifier that can tell its content level? This question is meant to validate the results that our previous paper has discovered using the new data set we have collected.
 
-R2: Given N types of known liquid data and 2 levels of an unknown liquid data, could we build a model that predicts its content level? If we can build a model, how many types of known liquid we need in order to achieve a decent performance? Put it differently, we want to explore how the prediction model's performance change as the number of known liquid (N) used for training increases. 
+R2: Given N types of known liquid data and 2 levels of an unknown liquid data, could we build a model that predicts its content level? If we can build a model, how many types of known liquid we need in order to achieve a decent performance? Put it differently, we want to explore how the prediction model's performance changes as the number of known liquid ($N$) used for training is varied.
 
 
 \subsection{Exploration on R1}
-The classification problem here is to predict the content level from 11 possible levels (0 to 1 with 10 percent as the interval) given the extracted 21 standardized MFCC and LPC features computed from an impulse response sound clip recorded using our sensor. We train a support vector machine classifier using libSVM~\cite{chang2011libsvm}. For evaluation, we did 10-fold cross validation. The evaluation result is shown in Table X. With the data set we collected, we were able to achieve the similar performance as ~\cite{fan2015soqr}. 
+The classification problem here is to predict the content level from 11 possible levels (0 to 1 with 10 percent as the interval) given the extracted 21 standardized MFCC and LPC features computed from an impulse response sound clip recorded using our sensor. We train a support vector machine classifier using libSVM~\cite{chang2011libsvm}. For evaluation, we did 10-fold cross validation. The evaluation result is shown in Table~\ref{table:svmEval}. With the data set we collected, we were able to achieve similar performance as~\cite{fan2015soqr}.
 
+\begin{table}[t]
+\caption{Evaluation of classification performance of an SVM classifier utilizing RBF kernel.}
+\label{table:svmEval}
+\begin{center}
+\begin{tabular}{ l | c | c | c }
+\textbf{LIQUID TYPE} & \textbf{OVERALL PRECISION} & \textbf{OVERALL RECALL} & \textbf{F-MEASURE} \\ \hline
+~ & ~ & ~ & ~\\
+Apple juice & 0.992 & 0.992 & 0.992 \\
+Canola oil & 0.996 & 0.996 & 0.996 \\
+Milk & 1.000 & 1.000 & 1.000 \\
+Olive oil & 0.998 & 0.998 & 0.998 \\
+Orange juice & 0.997 & 0.997 & 0.997 \\
+Soy sauce & 0.999 & 0.999 & 0.999 \\
+Syrup & 1.000 & 1.000 & 1.000 \\
+Tonic water & 0.996 & 0.996 & 0.996 \\
+Water & 0.999 & 0.999 & 0.999 \\
+\end{tabular}
+\end{center}
+\end{table}
 \subsection{Exploration on R2}
 As the prediction class (content level) is a continuous value between 0 and 1, we can treat the prediction as regression.
   
@@ -335,30 +357,30 @@ todo: conclusion goes here.
 %\end{center}
 %\caption{Sample figure caption.}
 %\end{figure}
+%
+%\subsection{Tables}
+%
+%All tables must be centered, neat, clean and legible. Do not use hand-drawn
+%tables. The table number and title always appear before the table. See
+%Table~\ref{sample-table}.
+%
+%Place one line space before the table title, one line space after the table
+%title, and one line space after the table. The table title must be lower case
+%(except for first word and proper nouns); tables are numbered consecutively.
 
-\subsection{Tables}
-
-All tables must be centered, neat, clean and legible. Do not use hand-drawn
-tables. The table number and title always appear before the table. See
-Table~\ref{sample-table}.
-
-Place one line space before the table title, one line space after the table
-title, and one line space after the table. The table title must be lower case
-(except for first word and proper nouns); tables are numbered consecutively.
-
-\begin{table}[t]
-\caption{Sample table title}
-\label{sample-table}
-\begin{center}
-\begin{tabular}{ll}
-\multicolumn{1}{c}{\bf PART}  &\multicolumn{1}{c}{\bf DESCRIPTION}
-\\ \hline \\
-Dendrite         &Input terminal \\
-Axon             &Output terminal \\
-Soma             &Cell body (contains cell nucleus) \\
-\end{tabular}
-\end{center}
-\end{table}
+%\begin{table}[t]
+%\caption{Sample table title}
+%\label{sample-table}
+%\begin{center}
+%\begin{tabular}{l|l}
+%\multicolumn{1}{c}{\bf PART}  &\multicolumn{1}{c}{\bf DESCRIPTION}
+%\\ \hline \\
+%Dendrite         &Input terminal \\
+%Axon             &Output terminal \\
+%Soma             &Cell body (contains cell nucleus) \\
+%\end{tabular}
+%\end{center}
+%\end{table}
 %
 %\section{Final instructions}
 %Do not change any aspects of the formatting parameters in the style files.
